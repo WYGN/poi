@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>采集员设置</title>
+    <link rel="stylesheet" href="element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div id="app">
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="18">
+            <el-row :gutter="10">
+                <br>
+                <el-col :span="16">
+                    <div>
+                        <h3>POI采集审核系统</h3>
+                    </div>
+                </el-col>
+                <el-col :span="8">
+                    <div class="right">
+                        <a href="collectionIndex.html"><el-button type="text">采集员主页</el-button></a>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="bg-purple-light">
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-light pd20">
+                        <div class="title">修改密码</div>
+                        <!-- 表单开始 -->
+                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="form"
+                                 style="width: 50%;">
+                            <el-form-item label="原始密码" prop="oldPwd">
+                                <el-input type="password" v-model="ruleForm.oldPwd" placeholder="原始密码"></el-input>
+                            </el-form-item>
+                            <el-form-item label="密码" prop="pwd">
+                                <el-input type="password" v-model="ruleForm.pwd" auto-complete="off" placeholder="密码"></el-input>
+                            </el-form-item>
+                            <el-form-item label="确认密码" prop="checkPwd">
+                                <el-input type="password" v-model="ruleForm.checkPwd" auto-complete="off" placeholder="确认密码"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label-width="100px">
+                                <el-button type="primary" @click="submitForm('ruleForm')">确认修改</el-button>
+                                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                            </el-form-item>
+                        </el-form>
+                        <!-- 表单结束 -->
+                        <div>
+                            <hr>
+                        </div>
+                        <br>
+                        <div class="title"><h3>数据导入导出</h3></div>
+                    </div>
+                </el-col>
+                <el-col :span="12">
+                    <div class="grid-content bg-purple-light pd20">
+                        <el-upload
+                                action=""
+                                accept="application/vnd.ms-excel"
+                                :on-preview="handlePreview"
+                                :on-remove="handleRemove"
+                                :before-upload="beforeUpload"
+                                :file-list="fileList">
+                            <el-button size="small" type="primary">导入数据</el-button>
+                            <div slot="tip" class="el-upload__tip">注意：导入的数据格式只支持Excel数据格式</div>
+                        </el-upload>
+                    </div>
+                </el-col>
+                <el-col :span="12">
+                    <div class="grid-content bg-purple-light pd20">
+                        <a href="data/demo.xls"><el-button type="text" class="right">下载示例格式</el-button></a>
+                    </div>
+                </el-col>
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-light pd20">
+                        <div><h3>已采集数据</h3>
+                            <div class="right">
+                                <el-button type="text" @click="reloadList">刷新列表</el-button>
+                            </div>
+                        </div>
+                        <el-table
+                                ref="multipleTable"
+                                :data="POIList"
+                                border
+                                tooltip-effect="dark"
+                                @selection-change="handleSelectionChange"
+                                style="width: 100%"
+                                max-height="400">
+                            <el-table-column
+                                    type="selection"
+                                    width="55">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="name"
+                                    label="POI名称"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Address"
+                                    label="地址"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="Verify"
+                                    label="审核状态">
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                </el-col>
+                <el-col :span="12">
+
+                </el-col>
+                <el-col :span="24">
+                    <div class="grid-content bg-purple-light pd20">
+                        <el-tooltip class="item right" effect="dark" content="注意：导出的数据格式只支持Excel数据" placement="bottom">
+                            <el-button type="primary" @click="submitList">导出数据</el-button>
+                        </el-tooltip>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
+</div>
+
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+<script type="text/javascript" src="element-ui/lib/index.js"></script>
+<script type="text/javascript" src="js/collectionSetting.js"></script>
+</body>
+</html>

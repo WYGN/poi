@@ -1,0 +1,17 @@
+{
+  "status": 1,
+  "result": {
+    "list": [
+      {
+      	"type": "admin",
+        "username": "admin",
+        "pwd": "123456"
+      },
+      {
+      	"type": "collector",
+        "username": "collector",
+        "pwd": "111111"
+      }
+    ]
+  }
+}

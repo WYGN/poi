@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>采集员主页</title>
+    <link rel="stylesheet" href="element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- 引入天地图js -->
+    <script type="text/javascript" src="http://www.mapgx.com/ime-gx/js/geowaySDK/geoway.all.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="18">
+            <el-row :gutter="10">
+                <br>
+                <el-col :span="16">
+                    <div>
+                        <h3>POI采集审核系统</h3>
+                    </div>
+                </el-col>
+                <el-col :span="8">
+                    <div class="right">
+                        <a href="collectionSetting.html"><el-button type="text">采集员设置</el-button></a>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row :gutter="10">
+                <el-col :span="10">
+                    <div class="grid-content bg-purple-light pd20">
+                        <div>
+                            <span>POI信息表</span>
+                        </div>
+                        &nbsp;
+                        <div>
+                            <!-- 表单开始 -->
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="55px" class="form">
+                                <el-form-item label="名称" prop="name">
+                                    <el-input v-model="ruleForm.name" placeholder="名称"></el-input>
+                                </el-form-item>
+                                <el-form-item label="别名" prop="otherName">
+                                    <el-input v-model="ruleForm.otherName" placeholder="别名"></el-input>
+                                </el-form-item>
+                                <el-form-item label="地址" prop="address">
+                                    <el-input v-model="ruleForm.address" placeholder="地址"></el-input>
+                                </el-form-item>
+                                <br>
+                                <div>
+                                    <span>经纬度：</span>
+                                    <span>{{ localAddress }}</span>
+                                    <el-button type="primery" size="small" class="right" @click="pickup()" v-show="!pickupFlag">拾取</el-button>
+                                    <el-button type="primery" size="small" class="right" @click="pickup()" v-show="pickupFlag">暂停拾取</el-button>
+                                </div>
+                                <br><br>
+                                <div style="display: inline-block;width:150px;">
+                                    上传图片<br><br>
+                                    <el-upload action=""
+                                               list-type="picture-card"
+                                               :on-preview="handlePictureCardPreview"
+                                               :on-remove="handleRemove"
+                                               :before-upload="beforeUploadImg" >
+                                        <i class="el-icon-plus"></i>
+                                    </el-upload>
+                                    <el-dialog v-model="dialogVisible" size="tiny">
+                                        <img width="100%" :src="dialogImageUrl" alt="">
+                                    </el-dialog>
+                                </div>
+                                <div style="display: inline-block;width: 100px;float: right">
+                                    上传附件<br><br>
+                                    <el-upload class="upload-demo"
+                                               action=""
+                                               :on-preview="handlePreview"
+                                               :on-remove="handleRemove"
+                                               :file-list="fileList">
+                                        <el-button size="small" type="primary">点击上传</el-button>
+                                        <div slot="tip" class="el-upload__tip"> </div>
+                                    </el-upload>
+                                </div>
+                                <br><br><br>
+                                <el-form-item label="备注">
+                                    <el-input type="textarea" v-model="ruleForm.desc" placeholder="在此输入备注。。。"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button>取消</el-button>
+                                    <el-button type="primary" @click="submitForm('ruleForm')">上传</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <!-- 表单结束 -->
+                        </div>
+                    </div><div><br><br></div>
+                </el-col>
+                <el-col :span="14">
+                    <div class="grid-content bg-purple-light">
+                        <div id="map" style="height: 725px" :class="{ 'cursor-map': pickupFlag }"></div>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
+</div>
+
+
+<!-- scripts -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+<script type="text/javascript" src="element-ui/lib/index.js"></script>
+<script type="text/javascript" src="js/collectionIndex.js"></script>
+</body>
+
+</html>

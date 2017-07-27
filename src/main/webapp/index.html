@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="app">
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="12">
+            <h2 class="index-title">POI采集审核系统</h2><br>
+            <el-row type="flex" class="row-bg" justify="center">
+                <el-col :span="14">
+                    <div class="grid-content bg-purple-light">
+                        <!-- 表单开始 -->
+                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px" class="form">
+                            <el-form-item label="用户名" prop="username">
+                                <el-input v-model="ruleForm.username" placeholder="用户名"></el-input>
+                            </el-form-item>
+                            <el-form-item label="密码" prop="pwd">
+                                <el-input type="password" v-model="ruleForm.pwd" placeholder="密码"></el-input>
+                            </el-form-item>
+                            <el-form-item label="验证码" prop="verifyCode">
+                                <el-input v-model="ruleForm.verifyCode" placeholder="验证码"
+                                          style="width: 50%;"></el-input>
+                                <img src="/poi/user/captcha" onclick="javascript:this.src=this.src+'?'+Math.random();"
+                                     class="verify">
+                            </el-form-item>
+                            <el-form-item>
+                                <el-checkbox v-model="savePwd" @click="savePwd = !savePwd">记住密码</el-checkbox>
+                                &nbsp;&nbsp;
+                                <el-button type="text">忘记密码？</el-button>
+                                <el-button type="text">新用户注册</el-button>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="submitForm('ruleForm')" style="width: 100%">登录
+                                </el-button>
+                            </el-form-item>
+                        </el-form>
+                        <!-- 表单结束 -->
+                    </div>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
+</div>
+
+
+<!-- scripts -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+<script type="text/javascript" src="element-ui/lib/index.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员主页</title>
+    <link rel="stylesheet" href="element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- 引入天地图js -->
+    <script type="text/javascript" src="http://www.mapgx.com/ime-gx/js/geowaySDK/geoway.all.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="18">
+            <el-row :gutter="10">
+                <br>
+                <el-col :span="16">
+                    <div>
+                        <h3>POI采集审核系统</h3>
+                    </div>
+                </el-col>
+                <el-col :span="8">
+                    <div class="right">
+                        <a href="adminSetting.html">
+                            <el-button type="text">管理员设置</el-button>
+                        </a>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row :gutter="10">
+                <el-col :span="10">
+                    <div class="grid-content bg-purple-light pd20">
+                        <div class="title">审核中心</div>
+                        &nbsp;
+                        <el-button type="text" v-for="item in cityList" @click="showTowns(item)">
+                            {{ item.cityName }}({{ item.districts.length }})
+                        </el-button>
+                        &nbsp;
+                        <ol>
+                            <li v-for="item in districts">
+                                <el-button type="text">{{ item.cityName }}</el-button>
+                            </li>
+                        </ol>
+
+                        <div><br></div>
+                        <div class="block">
+                            <el-pagination
+                                    layout="prev, pager, next"
+                                    :total="50">
+                            </el-pagination>
+                        </div>
+                    </div>
+                </el-col>
+                <el-col :span="14">
+                    <div class="grid-content bg-purple-light">
+                        <div id="map"></div>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-col>
+    </el-row>
+</div>
+
+
+<!-- scripts -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+<script type="text/javascript" src="element-ui/lib/index.js"></script>
+<script type="text/javascript" src="js/adminIndex.js"></script>
+</body>
+</html>
